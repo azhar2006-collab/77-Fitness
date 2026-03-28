@@ -3216,7 +3216,8 @@ function packageDropdownChanged() {
   }
   syncOfferCheckbox();
 })();
-/* ══ FORM SUBMISSION ══ */
+
+    /* ══ FORM SUBMISSION ══ */
 function handleSubmit() {
   const nameEl  = document.getElementById('f-name');
   const phoneEl = document.getElementById('f-phone');
@@ -3289,8 +3290,6 @@ function resetForm() {
   document.getElementById('contact-form-col').querySelectorAll('.form-group, .btn-submit, .form-note').forEach(el => el.style.display = '');
   activePlan = null; offerApplied = false; syncOfferCheckbox();
 }
-    /* GALLERY DRAG */
-    (function () { const t = document.querySelector('.gal-track'); let d = false, sx = 0, sl = 0; t.addEventListener('mousedown', e => { d = true; t.style.cursor = 'grabbing'; sx = e.pageX - t.offsetLeft; sl = t.scrollLeft; }); t.addEventListener('mouseleave', () => { d = false; t.style.cursor = ''; }); t.addEventListener('mouseup', () => { d = false; t.style.cursor = ''; }); t.addEventListener('mousemove', e => { if (!d) return; e.preventDefault(); t.scrollLeft = sl - (e.pageX - t.offsetLeft - sx) * 1.3; }); })();
   </script>
 </body>
 
