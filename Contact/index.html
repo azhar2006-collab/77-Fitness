@@ -946,61 +946,80 @@ function packageDropdownChanged() {
   }
   syncOfferCheckbox();
 })();
-
 /* ══ FORM SUBMISSION ══ */
 function handleSubmit() {
-  const name = document.getElementById('f-name').value.trim();
-  const phone = document.getElementById('f-phone').value.trim();
-  const email = document.getElementById('f-email').value.trim();
-  const location = document.getElementById('f-location').value;
-  const interest = document.getElementById('f-interest').value;
-  const plan = document.getElementById('f-plan').value || "General Enquiry";
+  const nameEl  = document.getElementById('f-name');
+  const phoneEl = document.getElementById('f-phone');
+  const name    = nameEl.value.trim();
+  const phone   = phoneEl.value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const location= document.getElementById('f-location').value;
+  const interest= document.getElementById('f-interest').value;
+  const pkg     = document.getElementById('f-package').value || 'General Enquiry';
 
-  // ✅ Validation
+  // ── Inline validation ──
+  let valid = true;
+  const errName  = document.getElementById('err-name');
+  const errPhone = document.getElementById('err-phone');
+
   if (!name) {
-    alert("Enter your name");
-    return;
+    errName.textContent = 'Please enter your name.';
+    errName.classList.add('show');
+    nameEl.focus();
+    valid = false;
+  } else {
+    errName.classList.remove('show');
   }
 
-  if (!/^[6-9]\d{9}$/.test(phone)) {
-    alert("Enter valid mobile number");
-    return;
+  if (!phone || !/^[6-9]\d{9}$/.test(phone)) {
+    errPhone.textContent = phone ? 'Please enter a valid 10-digit mobile number.' : 'Please enter your mobile number.';
+    errPhone.classList.add('show');
+    if (valid) phoneEl.focus();
+    valid = false;
+  } else {
+    errPhone.classList.remove('show');
   }
 
-  // ✅ WhatsApp Message
-  const message = `
-🏋️ New Enquiry - 77 Fitness Studio
+  if (!valid) return;
+
+  // ── Build WhatsApp message ──
+  const message =
+`🏋️ New Enquiry — 77 Fitness Studio
 
 👤 Name: ${name}
 📞 Phone: ${phone}
 📧 Email: ${email || 'Not provided'}
 📍 Location: ${location}
 💡 Interest: ${interest}
-📋 Plan: ${plan}
+📋 Package: ${pkg}
 
-Sent from website
-  `;
+Sent from website`;
 
-  const url = `https://wa.me/917871177779?text=${encodeURIComponent(message)}`;
+  window.open(`https://wa.me/917871177779?text=${encodeURIComponent(message)}`, '_blank');
 
-  // ✅ Open WhatsApp (no redirect, new tab)
-  window.open(url, "_blank");
-
-  // ✅ Show success message
-  document.getElementById('submit-success').style.display = 'block';
-  document.getElementById('ss-plan-info').textContent = plan;
-
-  // ✅ Reset form
-  document.getElementById('f-name').value = "";
-  document.getElementById('f-phone').value = "";
-  document.getElementById('f-email').value = "";
-  document.getElementById('f-plan').value = "";
-
-  // Hide after 5 sec
-  setTimeout(() => {
-    document.getElementById('submit-success').style.display = 'none';
-  }, 5000);
+  // ── Show in-page success ──
+  const form = document.getElementById('contact-form-col');
+  const successEl = document.getElementById('form-success');
+  const fsName    = document.getElementById('fs-name');
+  const fsPhone   = document.getElementById('fs-phone');
+  if (successEl && fsName && fsPhone) {
+    fsName.textContent  = name;
+    fsPhone.textContent = phone;
+    successEl.classList.add('active');
+    form.querySelectorAll('.form-group, .btn-submit, .form-note, #offer-banner, #offer-apply').forEach(el => el.style.display = 'none');
+  }
 }
+
+function resetForm() {
+  document.getElementById('f-name').value  = '';
+  document.getElementById('f-phone').value = '';
+  document.getElementById('f-email').value = '';
+  document.getElementById('f-package').value = '';
+  document.getElementById('form-success').classList.remove('active');
+  document.getElementById('contact-form-col').querySelectorAll('.form-group, .btn-submit, .form-note').forEach(el => el.style.display = '');
+  activePlan = null; offerApplied = false; syncOfferCheckbox();
+}
+
 </script>
 </body>
 </html>
