@@ -1,0 +1,14 @@
+﻿# robots.txt for 77 Fitness Studio
+# Directives for Google Search Central (Googlebot) and all web crawlers
+
+User-agent: *
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+# Sitemap Directive for Google Search Console
+Sitemap: https://77fitness.in/sitemap.xml
