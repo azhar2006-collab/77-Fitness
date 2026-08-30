@@ -1,16 +1,10 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://77fitness.in/</loc>
     <lastmod>2025-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://uploads.onecompiler.io/4445zjavc/44cbkprtu/At%2077%2C%20we%E2%80%99ve%20created%20a%20space%20where%20ambiance%20meets%20excellence.%20From%20the%20moment%20you%20walk%20in%2C%20the%20s.jpg</image:loc>
-      <image:title>77 Fitness Studio Chennai</image:title>
-      <image:caption>Premium Fitness Experience at 77 Fitness Studio</image:caption>
-    </image:image>
   </url>
   <url>
     <loc>https://77fitness.in/contact/</loc>
